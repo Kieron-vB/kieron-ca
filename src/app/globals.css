@@ -1,21 +1,40 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Custom Global Styles */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FFFAEC; /* Tailwind handles this, but you can set a global default */
+  color: #000000; /* Default text color */
+  font-family: 'Scheherazade New', serif; /* Matches your design system */
+  margin: 0;
+  padding: 0;
 }
+
+a {
+  color: #0066FF; /* Link color */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.button {
+  @apply py-6 bg-background text-text hover:bg-accent hover:text-background flex-grow;
+}
+
+/* Form Field Styles (optional) */
+input, textarea {
+  border: 1px solid rgba(0, 0, 0, 0.33); /* Matches your design system */
+  padding: 12px;
+  font-family: 'Figtree', sans-serif;
+  font-size: 24px;
+}
+
+input:focus, textarea:focus {
+  border-color: rgba(0, 0, 0, 1); /* Full opacity on focus */
+  outline: none;
+}
+
