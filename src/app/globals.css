@@ -21,10 +21,6 @@ a:hover {
   text-decoration: underline;
 }
 
-.button {
-  @apply py-6 bg-background text-text hover:bg-accent hover:text-background flex-grow;
-}
-
 /* Form Field Styles (optional) */
 input, textarea {
   border: 1px solid rgba(0, 0, 0, 0.33); /* Matches your design system */
