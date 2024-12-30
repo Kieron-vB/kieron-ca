@@ -9,8 +9,8 @@ export default function Navbar() {
 		<nav className="bg-background flex justify-between px-2 py-2">
 			<button className="button"><span>About</span></button>
 			<button className="button"><span>Publications</span></button>
-			<button className="button"><span>
-				<img src="/images/globe.svg" alt="Logo" className="h-8 w-8" />
+			<button className="button py-0"><span>
+				<img src="/images/Logo.svg" alt="Logo" className="h-14 w-16 block" />
 			</span></button>
 			<button className="button"><span>Contact</span></button>
 			<button className="button"><span>Resume</span></button>

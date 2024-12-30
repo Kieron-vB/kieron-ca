@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/Navbar';
 import { Scheherazade_New, Figtree } from "next/font/google";
 
 const scheherazadeNew = Scheherazade_New({
@@ -37,9 +36,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${scheherazadeNew.variable} ${figtree.variable}`}>
+    <html lang="en">
       <body>
-      <Navbar />
       <main>{children}</main>
      </body>
     </html>
