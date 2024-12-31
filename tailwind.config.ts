@@ -11,7 +11,7 @@ const config: Config = {
         link: '#0066FF',
       },
       fontFamily: {
-        headings: ['Scheherazade New', 'serif'],
+        headings: ['Scheherazade New', 'serif', 'tracking-wide'],
         body: ['Scheherazade New', 'serif'],
         buttons: ['Figtree', 'sans-serif'],
       },
