@@ -17,7 +17,7 @@ function Model() {
     return () => clearInterval(interval);
   }, []);
 
-  return <primitive ref={modelRef} object={scene} scale={0.5} />;
+  return <primitive ref={modelRef} object={scene} scale={4} />;
 }
 
 export default function HeadWithCircle() {

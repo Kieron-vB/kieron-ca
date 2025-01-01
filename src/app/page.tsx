@@ -9,7 +9,7 @@ const HeadWithCircle = dynamic(() => import("../components/Head"), {
 
 export default function AboutPage() {
   return (
-	  <main className="">
+	  <main className="bg-red-500 h-20 w-20">
 	  <Navbar />
 	  <HeadWithCircle />
 	  <section className="h-screen w-full overflow-hidden">
