@@ -3,16 +3,16 @@ import React, { useState, useEffect, useRef, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useGLTF, OrbitControls } from "@react-three/drei";
 
-function Model() {
+function HeadModel() {
   const modelRef = useRef<THREE.Group>(null);
   const { scene } = useGLTF("/models/head.glb");
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (modelRef.current) {
-        modelRef.current.rotation.y += 0.01;
+        modelRef.current.rotation.y += 0.01; // Rotates the model
       }
-    }, 16); // approximately 60fps
+    }, 16); // Approximately 60fps
 
     return () => clearInterval(interval);
   }, []);
@@ -20,36 +20,18 @@ function Model() {
   return <primitive ref={modelRef} object={scene} scale={4} />;
 }
 
-export default function HeadWithCircle() {
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window;
-      const offsetX = ((0.5 - e.clientX / innerWidth)) * 30;
-      const offsetY = ((0.5 - e.clientY / innerHeight)) * 30;
-      setOffset({ x: offsetX, y: offsetY });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
+export default function Head() {
   return (
-    <div 
-      className="absolute top-[20%] right-[15%] h-[500px] w-[500px] rounded-full bg-accent flex items-center justify-center overflow-hidden transition-transform duration-[100ms] ease-in-out"
-      style={{
-        transform: `translate(${offset.x}px, ${offset.y}px)`,
-      }}
-    >
+    <div className="absolute z-10 top-[6%] right-[7%] h-[800px] w-[800px] flex items-center justify-center">
       <Canvas camera={{ position: [0, 0, 5] }}>
         <Suspense fallback={null}>
-          <ambientLight intensity={0.5} />
+          <ambientLight intensity={0.8} />
           <directionalLight position={[2, 2, 2]} intensity={1} />
-          <Model />
-          <OrbitControls enableZoom={false} />
+          <HeadModel />
+          <OrbitControls enableZoom={false} enableRotate={true}/>
         </Suspense>
       </Canvas>
     </div>
   );
 }
+
