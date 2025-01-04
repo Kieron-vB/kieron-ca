@@ -17,6 +17,13 @@ module.exports = {
         headings: ['var(--font-scheherazade-new)'],
         body: ['var(--font-scheherazade-new)'],
         buttons: ['var(--font-figtree)'],
+	writing: ['var(--font-caveat)'],
+      },
+      letterSpacing: {
+	      tight: '-0.05em',
+      },
+      lineHeight: {
+	      tight: '0.7',
       },
       boxShadow: {
         'inner-accent': 'inset 8px 8px #FFCA38, inset -1px -1px 6px rgba(255, 202, 56, 0.1)',

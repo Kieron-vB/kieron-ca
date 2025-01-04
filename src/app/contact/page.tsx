@@ -1,0 +1,20 @@
+"use client";
+
+import Navbar from "@/components/Navbar";
+
+export default function About() {
+	return (
+		<main className="bg-background">
+		<Navbar />
+		<section className="pt-[7rem]">
+			<h1 className="pl-[2rem] text-[10vw] font-headings leading-tight tracking-tight text-text">
+				Contact
+			</h1>
+			<div className="flex flex-wrap gap-[10rem]">
+			<p className="text-center w-full pt-[4rem] pl-[4rem] pr-[4rem] font-body leading-[1.0] tracking-[-0.03em] text-text text-[2.5vw]">
+				If you want to contact Kieron about business propositions, top secret missions, his stance on magicians, or a personal admission you can email him at <span className="text-link"> kieron@kieron.ca</span>.			</p>
+			</div>
+		</section>
+		</main>
+	);
+}
