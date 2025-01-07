@@ -12,7 +12,7 @@ export default function About() {
 			</h1>
 			<div className="flex flex-col p-[2rem] gap-[0rem]">
 			<a
-		       		href=""
+		       		href="/pdfs/Engineering Resume - Kieron von Buchstab.pdf"
 				target="_blank"
 				rel="noopener noreferrer"
 				className="text-link text-[5vw] font-body hover:underline"
@@ -20,7 +20,7 @@ export default function About() {
 			Engineering Resume
 			</a>{" "}
 			<a
-		       		href=""
+		       		href="/pdfs/Finance Resume - Kieron von Buchstab.pdf"
 				target="_blank"
 				rel="noopener noreferrer"
 				className="text-link text-[5vw] font-body hover:underline"
@@ -28,7 +28,7 @@ export default function About() {
 			Finance Resume
 			</a>{" "}	
 			<a
-		       		href=""
+		       		href="/pdfs/Entertainment Resume - Kieron von Buchstab.pdf"
 				target="_blank"
 				rel="noopener noreferrer"
 				className="text-link text-[5vw] font-body hover:underline"
