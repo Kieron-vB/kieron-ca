@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <div className="relative">
       {/* Desktop Navbar */}
-	<div className="hidden lg:flex relative">
+	<div className="hidden md:flex relative">
       	<nav className="absolute z-10 w-full bg-background flex justify-between px-8 py-2">
        		<button className="button"><span>About</span></button>
        		<button className="button"><span>Publications</span></button>
@@ -33,7 +33,7 @@ export default function Navbar() {
     	</div>
 
       {/* Mobile Hamburger Menu */}
-      <nav className="absolute z-10 w-full bg-background p-[1rem] flex items-center justify-between lg:hidden">
+      <nav className="absolute z-10 w-full bg-background p-[1rem] flex items-center justify-between md:hidden">
         <button onClick={toggleMenu}>
           <img src="/images/hamburger-icon.svg" alt="Menu" className="h-[5vh]" />
         </button>
