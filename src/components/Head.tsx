@@ -18,15 +18,15 @@ function HeadModelWithLight() {
       {/* Add lights to the same group as the model */}
       <ambientLight intensity={0.8} />
       <directionalLight position={[2, 2, 2]} intensity={3} />
-      <primitive object={scene} scale={4} />
+      <primitive object={scene} scale={1.63} />
     </group>
   );
 }
 
 export default function Head() {
   return (
-    <div className="absolute z-10 top-[16%] right-[13%] h-[550px] w-[550px] flex items-center justify-center">
-      <Canvas camera={{ position: [0, 0, 4] }}>
+    <div className="relative z-10 w-full h-full flex items-center aspect-square">
+      <Canvas camera={{ position: [0, 0, 4], fov:30 }}>
         <Suspense fallback={null}>
           <hemisphereLight skyColor={"#ffffff"} groundColor={"#ffffff"} intensity={0.8} />
           <HeadModelWithLight />

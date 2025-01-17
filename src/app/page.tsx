@@ -12,14 +12,18 @@ export default function Home() {
   return (
 	  <main className="">
 	  <Navbar />
-	  <Circle />
-	  <Head />
-	  <section className="h-screen w-full overflow-hidden">
-	  	<div className="relative h-full">
-	  		<h1 className="absolute bottom-0 left-0 text-[15rem] leading-tight tracking-tight font-headings p-8">
-	  			Kieron <br /> von Buchstab
-	  		</h1>
-	  	</div>
+	  
+	  <section className="relative flex h-screen w-full overflow-hidden">
+	  	 <div className="hidden lg:block flex w-full"></div>
+		 <div className="flex w-full items-center justify-center">
+	 	 	<div className="relative flex w-[30vw] aspect-square items-center justify-center">
+	  			<Circle />
+	  			<Head />
+	  		</div>
+		</div>
+	  	<h1 className="absolute flex hidden lg:block p-standard absolute bottom-0 left-0 text-[20vw] 2xl:text-[25vh] leading-[0.7] tracking-[-0.05em] font-headings">
+	  		Kieron <br></br> von Buchstab
+	  	</h1>
 	  </section>
 	  </main>
   );

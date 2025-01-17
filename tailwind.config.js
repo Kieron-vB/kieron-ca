@@ -19,14 +19,23 @@ module.exports = {
         buttons: ['var(--font-figtree)'],
 	writing: ['var(--font-caveat)'],
       },
+      fontSize: {
+	      'mobile': '3vh',
+	      'desktop': '5vh',
+      },
       letterSpacing: {
 	      tight: '-0.05em',
+	      'paragraph': '-0.03em', 
       },
       lineHeight: {
 	      tight: '0.7',
+	      'paragraph': '1.0'
       },
       boxShadow: {
         'inner-accent': 'inset 8px 8px #FFCA38, inset -1px -1px 6px rgba(255, 202, 56, 0.1)',
+      },
+      spacing: {
+	      'standard': '2rem',
       },
     },
   },

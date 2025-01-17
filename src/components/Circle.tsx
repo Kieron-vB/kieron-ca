@@ -18,7 +18,7 @@ export default function Circle() {
 
   return (
     <div
-      className="absolute top-[18%] right-[13%] h-[550px] w-[550px] rounded-full bg-accent overflow-hidden transition-transform duration-[100ms] ease-in-out"
+      className="absolute flex w-full h-full rounded-full bg-accent overflow-hidden transition-transform duration-[100ms] ease-in-out"
       style={{
         transform: `translate(${offset.x}px, ${offset.y}px)`,
       }}
