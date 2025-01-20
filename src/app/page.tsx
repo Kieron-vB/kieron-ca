@@ -16,7 +16,7 @@ export default function Home() {
 	  <section className="relative flex h-screen w-full overflow-hidden">
 	  	 <div className="hidden lg:block flex w-full"></div>
 		 <div className="flex w-full items-center justify-center">
-	 	 	<div className="relative flex w-[30vw] aspect-square items-center justify-center">
+	 	 	<div className="relative flex w-[40vh] md:w-[50vh] 2xl:w-[60vh] aspect-square items-center justify-center">
 	  			<Circle />
 	  			<Head />
 	  		</div>
