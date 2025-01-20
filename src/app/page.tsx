@@ -2,6 +2,7 @@
 
 import Navbar from "../components/Navbar";
 import Circle from "../components/Circle";
+import Title from "../components/Title";
 import dynamic from "next/dynamic";
 
 const Head = dynamic(() => import("../components/Head"), {
@@ -19,6 +20,7 @@ export default function Home() {
 	 	 	<div className="relative flex w-[40vh] md:w-[50vh] 2xl:w-[60vh] aspect-square items-center justify-center">
 	  			<Circle />
 	  			<Head />
+				<Title />
 	  		</div>
 		</div>
 	  	<h1 className="absolute flex hidden lg:block p-standard absolute bottom-0 left-0 text-[20vw] 2xl:text-[25vh] leading-[0.7] tracking-[-0.05em] font-headings">
