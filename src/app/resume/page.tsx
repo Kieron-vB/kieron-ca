@@ -7,7 +7,7 @@ export default function About() {
 		<main className="bg-background">
 		<Navbar />
 		<section className="pt-[7rem] text-center">
-			<h1 className="pl-[2rem] text-[10vw] font-headings leading-tight tracking-tight text-text">
+			<h1 className="text-[10vw] font-headings leading-tight tracking-tight text-text">
 				Resume	
 			</h1>
 			<div className="flex flex-col pt-[4rem] px-standard">
