@@ -25,7 +25,7 @@ function HeadModelWithLight() {
 
 export default function Head() {
   return (
-    <div className="relative z-10 w-full h-full flex items-center aspect-square">
+    <div className="relative z-10 w-full h-full p-[3vh] sm:p-[0] flex items-center aspect-square">
       <Canvas camera={{ position: [0, 0, 4], fov:30 }}>
         <Suspense fallback={null}>
           <hemisphereLight skyColor={"#ffffff"} groundColor={"#ffffff"} intensity={0.8} />
