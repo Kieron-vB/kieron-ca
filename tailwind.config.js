@@ -43,7 +43,7 @@ module.exports = {
     function ({ addComponents }) {
       addComponents({
         '.button': {
-          '@apply py-4 px-6 rounded bg-background text-text text-base font-buttons transition-all duration-200 ease-in-out': {},
+          '@apply pb-4 pt-5 px-6 rounded bg-background text-text text-base font-buttons transition-all duration-200 ease-in-out': {},
           '&:active': {
             '@apply shadow-inner-accent': {},
           },
