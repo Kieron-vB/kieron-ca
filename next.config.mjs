@@ -1,14 +1,14 @@
 // next.config.mjs
-/** @type {import('next').NextConfig} */
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
 const nextConfig = {
   reactStrictMode: true,
   webpack(config) {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
-      // whenever someone does `import ... from "@react-three/fiber/jsx-runtime"`,
-      // point it at react/jsx-runtime instead:
-      "@react-three/fiber/jsx-runtime": require.resolve("react/jsx-runtime"),
+      "@react-three/fiber/jsx-runtime": require.resolve("react/jsx-runtime")
     };
     return config;
   },
