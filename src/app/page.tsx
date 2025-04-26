@@ -14,9 +14,10 @@ export default function Home() {
 	  <main className="">
 	  <Navbar />
 	  
-	  <section className="relative flex h-screen w-full overflow-hidden">
-	  	 <div className="hidden xl:block flex w-full"></div>
-		 <div className="flex w-full items-center justify-center pt-[5vh]">
+      <section className="relative flex h-screen w-full overflow-hidden">
+        <div className="hidden xl:block flex w-full"></div>
+        {/* On mobile, align top with extra padding; on md+, center with smaller padding */}
+        <div className="flex w-full items-start justify-center pt-[20vh] md:items-center md:pt-[5vh]">
 	 	 	<div className="relative flex w-[40vh] md:w-[50vh] 2xl:w-[60vh] aspect-square items-center justify-center">
 	  			<Circle />
 	  			<Head />

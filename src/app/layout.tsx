@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Scheherazade_New, Figtree, Caveat } from "next/font/google";
+import LoadingScreen from '../components/LoadingScreen';
 
 const scheherazadeNew = Scheherazade_New({
   subsets: ["latin"],
@@ -32,9 +33,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${scheherazadeNew.variable} ${figtree.variable} ${caveat.variable}`}>
-      <body className="bg-background">
+  <body className="bg-background">
+      <LoadingScreen>
         <main>{children}</main>
-      </body>
+      </LoadingScreen>
+  </body>
     </html>
   );
 }

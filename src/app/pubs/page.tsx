@@ -3,6 +3,7 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
+// import Publications3DCarousel from "@/components/Publications3DCarousel";
 
 const publications = [
   { title: "Commercial Off The Shelf Ground Stations For Use in Rapid Testing and Innovation of Space Systems", pdf: "/pdfs/Commercial Off The Shelf Ground Stations For Use in Rapid Testing and Innovation of Space Systems.pdf" },
@@ -23,8 +24,11 @@ export default function Publications() {
         </h1>
         <div className="flex flex-col pt-[4rem] px-standard">
           {publications.map((pub, index) => (
-            <div key={index} className="py-4 border-b border-accent"
-	    style={{ borderBottomWidth: "3.5px" }}>
+            <div
+              key={index}
+              className="py-4 border-b border-accent"
+              style={{ borderBottomWidth: "3.5px" }}
+            >
               <a
                 href={pub.pdf}
                 target="_blank"

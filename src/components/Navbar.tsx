@@ -40,26 +40,24 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Menu Drawer */}
-      {isMenuOpen && (
-        <div className="absolute top-0 left-0 w-3/4 h-screen bg-background z-20 p-8 shadow-lg transform transition-transform duration-300 ease-in-out flex flex-col">
-	  <div className={"flex justify-between"}>
-          	<button className="button">
-			<span>
-            		<img src="/images/Logo.svg" alt="Close" className="h-[6vh] w-[6vh]" />
-			</span>
-          	</button>
-		<button className="button" onClick={toggleMenu}>
-			<span>
-            		<img src="/images/close.svg" alt="Close" className="h-[5vh] w-[5vh]" />
-			</span>
-          	</button>
-	  </div>
-          <button className="button text-left text-2xl"><span>About</span></button>
-          <button className="button text-left text-2xl"><span>Publications</span></button>
-          <button className="button text-left text-2xl"><span>Contact</span></button>
-          <button className="button text-left text-2xl"><span>Resume</span></button>
+      <div className={`absolute top-0 left-0 w-3/4 h-screen bg-background z-20 p-8 shadow-lg transform transition-transform duration-300 ease-in-out flex flex-col ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+          <div className="flex justify-between">
+            <a href="/" className="button">
+              <span>
+                <img src="/images/Logo.svg" alt="Logo" className="h-[6vh] w-[6vh]" />
+              </span>
+            </a>
+            <button className="button" onClick={toggleMenu}>
+              <span>
+                <img src="/images/close.svg" alt="Close" className="h-[5vh] w-[5vh]" />
+              </span>
+            </button>
+          </div>
+          <a href="/about" className="button text-left text-2xl"><span>About</span></a>
+          <a href="/pubs" className="button text-left text-2xl"><span>Publications</span></a>
+          <a href="/contact" className="button text-left text-2xl"><span>Contact</span></a>
+          <a href="/resume" className="button text-left text-2xl"><span>Resume</span></a>
         </div>
-      )}
     </div>
   );
 }

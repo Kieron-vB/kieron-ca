@@ -1,13 +1,18 @@
 
 "use client";
 import * as THREE from "three";
-import React, { useRef, Suspense } from "react";
+import React, { useRef, Suspense, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, OrbitControls } from "@react-three/drei";
+
 
 function HeadModelWithLight() {
   const groupRef = useRef<THREE.Group>(null);
   const { scene } = useGLTF("/models/head.glb");
+  // Signal that the 3D model has loaded
+  useEffect(() => {
+    window.dispatchEvent(new Event("model-loaded"));
+  }, []);
 
   useFrame(() => {
 	  if (groupRef.current) {
