@@ -13,6 +13,14 @@ const publications = [
   { title: "The Importance of Lunar Telecommunications and its Use in Lunar Exploration", pdf: "/pdfs/The Importance of Lunar Telecommunications and its Use in Lunar Exploration.pdf" },
   { title: "The Receipt and Analysis of Weather Data in a Simulated Martian Environment", pdf: "/pdfs/The Receipt and Analysis of Weather Data in a Simulated Martian Environment.pdf" },
 ];
+const icons = [
+  "🛰️",
+  "🌪️",
+  "🛠️",
+  "🎓",
+  "🌕",
+  "🔴",
+];
 
 export default function Publications() {
   return (
@@ -22,24 +30,23 @@ export default function Publications() {
         <h1 className="text-[10vw] font-headings leading-tight tracking-tight text-text">
           Publications
         </h1>
-        <div className="flex flex-col pt-[4rem] px-standard">
+        <ul className="flex flex-col pt-[4rem] px-standard text-left space-y-12">
           {publications.map((pub, index) => (
-            <div
-              key={index}
-              className="py-4 border-b border-accent"
-              style={{ borderBottomWidth: "3.5px" }}
-            >
+            <li key={index}>
               <a
                 href={pub.pdf}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-link text-mobile lg:text-desktop font-body hover:underline"
+                className="group flex items-center space-x-4 overflow-visible"
               >
-                {pub.title}
+                <span className="text-2xl lg:text-3xl">{icons[index]}</span>
+                <span className="text-link text-mobile lg:text-desktop font-body leading-tight transform origin-left transition-transform duration-200 group-hover:scale-105">
+                  {pub.title}
+                </span>
               </a>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
     </main>
   );
