@@ -13,17 +13,17 @@ export default function Navbar() {
   return (
     <div className="relative">
       {/* Desktop Navbar */}
-	<div className="hidden md:flex relative">
-      	<nav className="absolute z-10 w-full bg-background flex justify-between px-8 pt-3 pb-2">
-       		<a href="/about" className="button"><span>About</span></a>
-		<a href="/pubs" className="button"><span>Publications</span></a>
-      		<a href="/" className="button py-0 pt-1">
+    <div className="hidden md:flex relative">
+      <nav className="absolute z-10 w-full bg-background flex justify-between px-8 pt-3 pb-2">
+        <a href="/about" className="button"><span>About</span></a>
+        <a href="/pubs" className="button"><span>Publications</span></a>
+        <a href="/" className="button py-0 pt-1">
     			<span>
       				<img src="/images/Logo.svg" alt="Logo" className="h-14 w-16 block" />
     			</span>
   		</a>        	
 		<a href="/contact" className="button"><span>Contact</span></a>
-        	<a href="/resume" className="button"><span>Resume</span></a>
+        <a href="/pdfs/Engineering Resume - Kieron von Buchstab.pdf" target="_blank" rel="noopener noreferrer" className="button"><span>Resume</span></a>
       	</nav>
       	<div 
       	className="absolute bottom-[-5.8rem] left-8 right-8 h-[5px] bg-accent"
@@ -56,7 +56,7 @@ export default function Navbar() {
           <a href="/about" className="button text-left text-2xl"><span>About</span></a>
           <a href="/pubs" className="button text-left text-2xl"><span>Publications</span></a>
           <a href="/contact" className="button text-left text-2xl"><span>Contact</span></a>
-          <a href="/resume" className="button text-left text-2xl"><span>Resume</span></a>
+          <a href="/pdfs/Engineering Resume - Kieron von Buchstab.pdf" target="_blank" rel="noopener noreferrer" className="button text-left text-2xl"><span>Resume</span></a>
         </div>
     </div>
   );
