@@ -20,7 +20,7 @@ function HeadModelWithLight() {
 	  }
   });
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} rotation={[0, Math.PI, 0]}>
       {/* Add lights to the same group as the model */}
       <ambientLight intensity={0.8} />
       <directionalLight position={[2, 2, 2]} intensity={3} />
