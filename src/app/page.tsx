@@ -12,12 +12,14 @@ const Head = dynamic(() => import("../components/Head"), {
 export default function Home() {
   return (
 	  <main className="">
-	  <Navbar />
+    <div className="hidden md:block">
+      <Navbar />
+    </div>
 	  
-      <section className="relative flex h-screen w-full overflow-hidden">
+      <section className="relative flex h-auto md:h-screen w-full overflow-hidden">
         <div className="hidden xl:block flex w-full"></div>
         {/* On mobile, align top with extra padding; on md+, center with smaller padding */}
-        <div className="flex w-full items-start justify-center pt-[20vh] md:items-center md:pt-[5vh]">
+        <div className="flex w-full items-start justify-center pt-[10vh] md:items-center md:pt-[5vh]">
 	 	 	<div className="relative flex w-[40vh] md:w-[50vh] 2xl:w-[60vh] aspect-square items-center justify-center">
 	  			<Circle />
 	  			<Head />
@@ -28,6 +30,12 @@ export default function Home() {
 	  		Kieron <br></br> von Buchstab
 	  	</h1>
 	  </section>
-	  </main>
+    <nav className="md:hidden bg-background px-standard pt-4 pb-8 flex flex-col space-y-4">
+      <a href="/about" className="button text-left text-2xl"><span>About</span></a>
+      <a href="/pubs" className="button text-left text-2xl"><span>Publications</span></a>
+      <a href="/contact" className="button text-left text-2xl"><span>Contact</span></a>
+      <a href="/pdfs/Engineering Resume - Kieron von Buchstab.pdf" target="_blank" rel="noopener noreferrer" className="button text-left text-2xl"><span>Resume</span></a>
+    </nav>
+  </main>
   );
 }
