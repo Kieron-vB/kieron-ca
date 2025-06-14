@@ -40,7 +40,7 @@ export default function Publications() {
                 className="group flex items-center space-x-4 overflow-visible"
               >
                 <span className="text-2xl lg:text-3xl">{icons[index]}</span>
-                <span className="text-link text-mobile lg:text-desktop font-body leading-tight transform origin-left transition-transform duration-200 group-hover:scale-105">
+                <span className="text-link text-mobile lg:text-desktop font-body leading-[0.9] transform origin-left transition-transform duration-200 group-hover:scale-105">
                   {pub.title}
                 </span>
               </a>
