@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <div className="relative">
       {/* Desktop Navbar */}
-    <div className="hidden md:flex relative">
+    <div className="hidden md:flex relative z-20">
       <nav className="absolute z-10 w-full bg-background flex justify-between px-8 pt-3 pb-2">
         <a href="/about" className="button"><span>About</span></a>
         <a href="/pubs" className="button"><span>Publications</span></a>
