@@ -45,6 +45,12 @@ export default function Home() {
       <a href="/pubs" className="block w-full text-left text-text text-2xl font-buttons border-b border-accent">
         Publications
       </a>
+      <a href="/projects" className="block w-full text-left text-text text-2xl font-buttons border-b border-accent">
+        Projects
+      </a>
+      <a href="/merch" className="block w-full text-left text-text text-2xl font-buttons border-b border-accent">
+        Merch
+      </a>
       <a href="/contact" className="block w-full text-left text-text text-2xl font-buttons border-b border-accent">
         Contact
       </a>

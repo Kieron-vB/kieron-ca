@@ -14,14 +14,16 @@ export default function Navbar() {
     <div className="relative">
       {/* Desktop Navbar */}
     <div className="hidden md:flex relative">
-      <nav className="absolute z-10 w-full bg-background flex justify-between px-8 pt-3 pb-2">
+      <nav className="absolute z-20 w-full bg-background flex justify-between px-8 pt-3 pb-2">
         <a href="/about" className="button"><span>About</span></a>
         <a href="/pubs" className="button"><span>Publications</span></a>
+        <a href="/projects" className="button"><span>Projects</span></a>
         <a href="/" className="button py-0 pt-1">
     			<span>
       				<img src="/images/Logo.svg" alt="Logo" className="h-14 w-16 block" />
     			</span>
   		</a>        	
+        <a href="/merch" className="button"><span>Merch</span></a>
 		<a href="/contact" className="button"><span>Contact</span></a>
         <a href="/pdfs/Engineering Resume - Kieron von Buchstab.pdf" target="_blank" rel="noopener noreferrer" className="button"><span>Resume</span></a>
       	</nav>
@@ -33,7 +35,7 @@ export default function Navbar() {
     	</div>
 
       {/* Mobile Hamburger Menu */}
-      <nav className="absolute z-10 w-full bg-background p-[1rem] flex items-center justify-between md:hidden">
+      <nav className="absolute z-20 w-full bg-background p-[1rem] flex items-center justify-between md:hidden">
         <button onClick={toggleMenu}>
           <img src="/images/hamburger-icon.svg" alt="Menu" className="h-[5vh]" />
         </button>
@@ -55,6 +57,8 @@ export default function Navbar() {
           </div>
           <a href="/about" className="button text-left text-2xl"><span>About</span></a>
           <a href="/pubs" className="button text-left text-2xl"><span>Publications</span></a>
+          <a href="/projects" className="button text-left text-2xl"><span>Projects</span></a>
+          <a href="/merch" className="button text-left text-2xl"><span>Merch</span></a>
           <a href="/contact" className="button text-left text-2xl"><span>Contact</span></a>
           <a href="/pdfs/Engineering Resume - Kieron von Buchstab.pdf" target="_blank" rel="noopener noreferrer" className="button text-left text-2xl"><span>Resume</span></a>
         </div>
