@@ -1,7 +1,7 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import ProjectsCarousel from "@/components/EnhancedProjectsCarousel";
+import Projects3DCarousel from "@/components/Projects3DCarousel";
 
 export default function Projects() {
   const projects = [
@@ -33,7 +33,7 @@ export default function Projects() {
           Projects
         </h1>
         <div className="mt-8">
-          <ProjectsCarousel items={projects} />
+          <Projects3DCarousel items={projects} />
         </div>
       </section>
     </main>
