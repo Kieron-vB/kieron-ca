@@ -4,28 +4,33 @@ const OMEGA: f64 = 377.0;    //angular velocity (rad/s)
 const NU: f64 = 1.48e-5;   //dynamic viscosity of air (m^2/s)
 const RHO: f64 = 1.225;    //density of air (kg/m^3)
 
-const DELTA_Y: f64 = 0.01;   //y spacing (m)
-const DELTA_T: i32 = 1;      //time spacing (s)
+const DELTA_Y: f64 = 0.001;   //y spacing (m)
+const DELTA_T: f64 = 0.001;      //time spacing (s)
 
 fn main() {
+    AB();
+    //RK();
+}
 
+fn f(imin1: f64, i: f64, iplus1: f64) -> f64 {
+    NU * (imin1 - (2 as f64) * i + iplus1) / (DELTA_Y * DELTA_Y) * DELTA_T
+}
 
+fn AB() {
     //Variables
-    let mut spacetime: Vec<Vec<f64>> = vec![];  //spacetime composed of a vector (space) nested in
-                                                //another vector (time)
+    let mut spacetime: Vec<Vec<f64>> = vec![];  //spacetime composed of a vector (space) nested in another vector (time)
     let mut u: f64 = 0.0;
     let mut n: usize = 0;
 
     let u_surface: f64 = R_SHAFT*OMEGA;
-    while true {
+    loop {
         spacetime.push(vec![]); //create a time space at the current n
         spacetime[n].push(0 as f64);
 
         let mut i: usize = 0;
         let mut selection = 0; //tells us which if statement we're at to debug
-        while i as f64 * DELTA_Y < R_SHAFT{
+        while i as f64 * DELTA_Y < 0.02*R_SHAFT{ //MAKE 0.02*RSHAFT LATER
             spacetime[n].push(0 as f64);
-
 
             //Boundary & Initial Conditions
             if n == 0 {
@@ -39,31 +44,100 @@ fn main() {
 
             //Euler Implementation
             else if i == 1 && n>0 {
-                spacetime[n][i] = spacetime[n-1][i] + 
-                    NU * (spacetime[n-1][i-1] - (2 as f64) * spacetime[n-1][i] + spacetime[n-1][i+1]) / (DELTA_Y*DELTA_Y);
+                spacetime[n][i] = spacetime[n-1][i] + f(spacetime[n-1][i-1], spacetime[n-1][i], spacetime[n-1][i+1]) ;
                 selection = 3;
             }   
 
             //Adams-Bashforth Implementation
-            else if  n > 1 && i>0 {
-                spacetime[n][i]  = spacetime[n-1][i] + 
-                    (DELTA_T as f64/2 as f64) * 
-                    ((3 as f64) * 
-                    NU * (spacetime[n-1][i-1] - (2 as f64) * spacetime[n-1][i] + spacetime[n-1][i+1]) / (DELTA_Y*DELTA_Y) - 
-                    NU * (spacetime[n-2][i-1] - (2 as f64) * spacetime[n-2][i] + spacetime[n-2][i+1]) / (DELTA_Y*DELTA_Y));
-                selection = 4; 
+            else if  n > 1 && i>1 {
+                spacetime[n][i]  = spacetime[n-1][i] + (DELTA_T / 2 as f64) * ((3 as f64) * f(spacetime[n-1][i-1], spacetime[n-1][i], spacetime[n-1][i+1])- f(spacetime[n-2][i-1], spacetime[n-2][i], spacetime[n-2][i+1]));
+                selection = 4;
             }
-            u = spacetime[n][i];
-            println!("n = {} || i = {} || u = {} || selection = {}", n, i, u, selection);
+            println!("n = {} || i = {} || imax = {} || selection = {} || u = {}", n, i, spacetime[n].len(), selection, spacetime[n][i]);
             i = i + 1;
         }
-        n = n + 1;
-        if spacetime[n-1][1] > 28.0 {
+        let i_max = spacetime[n].len()-2;   //subtract 2 to account for the cells we added at the
+                                            //beginning
+        if spacetime[n][i_max] > 0.01*u_surface{
             break
         }
+        n = n + 1;
     }
     println!("{:?}", spacetime);
 }
 
+fn RK() {
+    //Variables
+    let mut spacetime: Vec<Vec<f64>> = vec![];  //spacetime composed of a vector (space) nested in another vector (time)
+    let mut u: f64 = 0.0;
+    let mut n: usize = 0;
 
+    let u_surface: f64 = R_SHAFT*OMEGA;
+    loop {
+        spacetime.push(vec![]); //create a time space at the current n
+        spacetime[n].push(0 as f64);
 
+        let mut i: usize = 0;
+        let mut selection = 0; //tells us which if statement we're at to debug
+        while i as f64 * DELTA_Y < 0.02*R_SHAFT{ 
+            spacetime[n].push(0 as f64);
+
+            //Boundary & Initial Conditions
+            if n <= i {
+                spacetime[n][i] = 0 as f64;
+                selection = 1;
+            }
+            else if n > 0 && i == 0 {
+                spacetime[n][0] = u_surface;
+                selection = 2;
+            }
+
+            //Euler Implementation
+            else if i < 4 {
+                spacetime[n][i] = spacetime[n-1][i] + f(spacetime[n-1][i-1], spacetime[n-1][i], spacetime[n-1][i+1]) ;
+                selection = 3;
+            }   
+
+            //Runge-Kutta Implementation
+
+            else if  n > 1 && i>0 {
+                println!("ENTERING RUNGE KUTTA || n = {} || i = {} ", n, i);
+
+                //Create a set of the first predictor
+                let mut p1: Vec<f64> = vec![];
+                for j in i-3..i+4{
+                    p1.push(spacetime[n-2][j] + (DELTA_T / 2 as f64) * f(spacetime[n-2][j-1], spacetime[n-2][j], spacetime[n-2][j+1]));
+                    //println!("j: {} || p1.len(): {}", j, p1.len());
+                }
+
+                //Create a set for the second predictor
+                let mut p2: Vec<f64> = vec![];
+                for j in 1..6{
+                    p2.push(spacetime[n-2][j] + (DELTA_T / 2 as f64) * f(p1[j-1], p1[j], p1[j+1]));
+                    //println!("j: {} || p2.len(): {}", j, p2.len());
+                }
+                
+                //Third Predictor
+                let mut p3: Vec<f64> = vec![];
+                for j in 1..4{
+                    p3.push(spacetime[n-2][j] + DELTA_T * f(p2[j-1], p2[j], p2[j+1]));
+                    //println!("j: {} || p3.len(): {}", j, p3.len());
+                }
+
+                //Corrector
+                spacetime[n][i] = spacetime[n-1][i] + (DELTA_T / 6 as f64) * (f(spacetime[n-2][i-1], spacetime[n-2][i], spacetime[n-2][i+1]) + 2 as f64 * f(p1[2], p1[3], p1[4]) + 2 as f64 * f(p2[1], p2[2], p2[3]) + f(p3[0], p3[1], p3[2]));
+                selection = 4;
+            }
+            spacetime[n].push(0.0);
+            
+            println!("n = {} || i = {} || imax = {} || selection = {} || u = {}", n, i, spacetime[n].len(), selection, spacetime[n][i]);
+            i = i + 1;
+        }
+        let i_max: usize = (spacetime[n].len()-3)/2;
+        if spacetime[n][i_max] > 0.01*u_surface{
+            break
+        }
+        n = n + 1;
+    }
+    println!("{:?}", spacetime);
+}
