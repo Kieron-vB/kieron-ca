@@ -1,8 +1,8 @@
 import React from "react";
 
 const CircularTitle = () => {
-  const title = "Kieron von Buchstab  "; // Include spaces for even spacing
-  const radius = 38; // radius in vh units
+  const title = "Kieron von Buchstab "; // Include spaces for even spacing
+  const radius = 39; // radius in vh units
                            // Positive values rotate clockwise
                            // Negative values rotate counter-clockwise
 
@@ -20,12 +20,12 @@ const CircularTitle = () => {
           
           // Calculate the rotation needed to make the letter face center
           // Now including the rotation offset for fine-tuning
-          const letterRotation = angle + 90 - 17*index;
+          const letterRotation = angle + 90 - 18.0*index;
           
           return (
             <span
               key={index}
-              className="absolute text-black font-headings text-[28vw]"
+              className="absolute text-black font-headings text-[25vw]"
               style={{
                 transform: `
                   rotate(${angle}deg) 
