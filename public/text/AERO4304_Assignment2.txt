@@ -1,0 +1,167 @@
+
+//Libraries (Used for exporting data, not in models)
+use std::error::Error;
+use csv::WriterBuilder;
+
+//Constants
+const START_X: f64 = -0.0;     //x starting position (m)
+const END_X: f64 = 8.0;        //x ending position (m)
+const END_T: f64 = 1.0;        //end time (s)
+                                
+const c: f64 = 4.0;
+
+const COURANT: f64 = 1.2;       //The Courant number
+const DELTA_T: f64 = 1.0e-4;      //time spacing (s)
+const DELTA_X: f64 = c*DELTA_T/COURANT;   //y spacing (m)
+
+const MODEL: usize = 3;     //Model selector: || 1 = Euler || 2 = Lax-Wendroff || 3 =
+                            //Crank-Nicholson || 
+
+//Function to export data
+fn export(i_max: usize, n_max: usize, u: Vec<Vec<f64>>) -> Result<(), Box<dyn Error>> {
+    let mut wtr = WriterBuilder::new()
+        .flexible(true)
+        .from_path("export.csv")?;
+
+    let mut model = "";
+    if MODEL == 1{model = "Euler"}
+    else if MODEL ==2{model = "Lax-Wendroff"}
+    else if MODEL == 3{model = "Crank-Nicolson"}
+
+    wtr.serialize(("START_X", "END_X", "END_T", "DELTA_T", "MODEL"))?;
+    wtr.serialize((START_X, END_X, END_T, DELTA_T, model))?;
+    wtr.serialize(())?;
+    let mut xt = format!("COURANT: {}, DELTA_X: {}", COURANT, DELTA_X);
+    wtr.serialize(("", "", xt))?;
+
+    wtr.serialize(("t", "x", "u"))?;
+    for j in 0..i_max+1{
+        let x: f64 = START_X + DELTA_X * j as f64;
+        let t: f64 = END_T;
+        wtr.serialize((t, x, u[n_max][j]))?;
+    }
+    {wtr.flush()?;}
+    println!("Written to csv");
+    Ok(())
+}    
+
+fn main() {
+
+    //Variables
+    let mut spacetime: Vec<Vec<f64>> = vec![];  //spacetime composed of a vector (space) nested in another vector (time)
+    let mut n: usize = 0;
+
+    let i_max: usize = (((END_X-START_X)/DELTA_X).floor()) as usize;     //Calculates maximum number of, .floor rounds down.
+    let n_max: usize = ((END_T/DELTA_T).floor()) as usize;               //Calculates maximnum number of time steps.
+    
+    println!("n_max: {} || i_max: {}", n_max, i_max);
+
+    //Models
+    while n<=n_max as usize {
+        spacetime.push(vec![]); //create a time space at the current n
+        spacetime[n].push(0 as f64);    //fill the current time space with a 0.
+
+        let mut i: usize = 0;
+        let mut selection = 0; //tells us which if statement we're at to debug
+
+        let x_pos = START_X;
+
+        //println!("//////////////////////////////////////////////////////////////////////////////");
+        while i<=i_max as usize{
+            let x_pos: f64 = START_X + (i as f64) * DELTA_X;
+            spacetime[n].push(0 as f64);
+
+            //Boundary & Initial Conditions
+            if n == 0 && x_pos <= 0.0 {
+                spacetime[n][i] = 2.0;
+                selection = 1;
+            }
+            else if n == 0 && x_pos > 0.0 {
+                spacetime[n][i] = 1.0;
+                selection = 2;
+            }
+            else if i == 0{
+                spacetime[n][i] = 2.0;
+                selection = 3;
+            }
+            else if i == i_max as usize{
+                spacetime[n][i] = 1.0;
+                selection = 4;
+            }
+
+            //Euler
+            else if MODEL == 1{
+                selection = 5;
+                spacetime[n][i] = DELTA_T * c *(spacetime[n-1][i-1]-spacetime[n-1][i])/DELTA_X + spacetime[n-1][i];
+            }
+
+            //Lax-Wendroff
+            else if MODEL == 2{
+                selection = 5;
+                spacetime[n][i] = DELTA_T * (c*c*DELTA_T/2 as f64 * (spacetime[n-1][i+1]-2 as f64 *spacetime[n-1][i]+spacetime[n-1][i-1])/(DELTA_X*DELTA_X) - c*(spacetime[n-1][i+1]-spacetime[n-1][i-1])/(2 as f64 *DELTA_X)) + spacetime[n-1][i];
+            }
+
+            //Crank-Nicholson
+            else if MODEL == 3{
+                selection = 5;
+                let K: f64 = 4 as f64 *DELTA_X/(c*DELTA_T);
+                                      
+                //Create space in spacetime
+                for j in i..i_max{
+                    spacetime[n].push(0.0);
+                }
+
+                //Populate tridiagonal matrix space
+                let mut tridi: Vec<Vec<f64>> = Vec::new();  //create tridiagonal matrix space
+                for j in 1..i_max {
+                    let D: f64 = spacetime[n-1][j+1] - K*spacetime[n-1][j] - spacetime[n-1][j-1];
+                    if j == 1 {
+                        tridi.push( vec![0.0, -1.0*K, -1.0, D - 2.0] );  //-2.0 comes from boundary
+                                                                        //condition
+                    }
+                    else if j == i_max-1 {
+                        tridi.push( vec![1.0, -1.0*K, 0.0, D + 1.0] );   //1.0 comes from boundary
+                                                                        //condition
+                    }
+                    else {
+                        tridi.push( vec![1.0, -1.0*K, -1.0, D] );
+                    }
+                }
+
+                //Forward sweep
+                for j in 0..tridi.len() {
+                    if j == 0{
+                        tridi[j][2] = tridi[j][2] / tridi[j][1];
+                        tridi[j][3] = tridi[j][3] / tridi[j][1];
+                    }
+                    else{
+                        tridi[j][2] = tridi[j][2] / (tridi[j][1] - tridi[j][0] * tridi[j-1][2]);
+                        tridi[j][3] = (tridi[j][3] - tridi[j][0] * tridi[j-1][3]) / (tridi[j][1] - tridi[j][0] * tridi[j-1][2]);
+                    }
+                }
+                
+                //Backward sweep
+                for j in (0..tridi.len()).rev() {
+                    let i = j+1;
+                    if j == tridi.len()-1{
+                        spacetime[n][i] = tridi[j][3];
+                        selection = 6;
+                    }
+                    else {
+                        spacetime[n][i] = tridi[j][3] - tridi[j][2] * spacetime[n][i+1];
+                        selection = 7;
+                    }
+
+                    let x_pos: f64 = START_X + (i as f64) * DELTA_X;
+                    //println!("selection: {} || x_pos: {} || n: {} || i: {} || u: {}", selection, x_pos, n, i, spacetime[n][i]);
+                }
+                i = i_max-1 as usize;
+            }
+            //println!("selection: {} || x_pos: {} || n: {} || i: {} || u: {}", selection, x_pos, n, i, spacetime[n][i]);
+            i = i + 1;
+        }
+        n = n + 1;
+    }
+    println!("spacetime[n_max-1][i_max-1]: {}", spacetime[n_max-1][i_max-1]);
+    export(i_max, n_max, spacetime);
+}   

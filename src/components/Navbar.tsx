@@ -13,8 +13,13 @@ export default function Navbar() {
   return (
     <div className="relative">
       {/* Desktop Navbar */}
+<<<<<<< HEAD
     <div className="hidden md:flex relative">
       <nav className="absolute z-20 w-full bg-background flex justify-between px-8 pt-3 pb-2">
+=======
+    <div className="hidden md:flex relative z-20">
+      <nav className="absolute z-10 w-full bg-background flex justify-between px-8 pt-3 pb-2">
+>>>>>>> main
         <a href="/about" className="button"><span>About</span></a>
         <a href="/pubs" className="button"><span>Publications</span></a>
         <a href="/" className="button py-0 pt-1">

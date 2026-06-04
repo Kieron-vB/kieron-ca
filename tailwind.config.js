@@ -14,22 +14,23 @@ module.exports = {
         link: '#0066FF',
       },
       fontFamily: {
-        headings: ['var(--font-scheherazade-new)'],
-        body: ['var(--font-scheherazade-new)'],
+	      headings: ['var(--font-main-font)'],
+        body: ['var(--font-main-font)'],
         buttons: ['var(--font-figtree)'],
 	writing: ['var(--font-caveat)'],
       },
       fontSize: {
 	      'mobile': '3vh',
-	      'desktop': '5vh',
+	      'desktop': '4vh',
+	      'base': '1.6vh',
       },
       letterSpacing: {
 	      tight: '-0.05em',
 	      'paragraph': '-0.03em', 
       },
       lineHeight: {
-	      tight: '0.7',
-	      'paragraph': '1.0'
+	      tight: '1.1',
+	      'paragraph': '1.1'
       },
       boxShadow: {
         'inner-accent': 'inset 8px 8px #FFCA38, inset -1px -1px 6px rgba(255, 202, 56, 0.1)',

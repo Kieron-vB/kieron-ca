@@ -28,8 +28,9 @@ export default function Home() {
             <Title />
           </div>
 		</div>
-	  	<h1 className="absolute flex hidden xl:block p-standard absolute bottom-0 left-0 text-[20vw] 2xl:text-[25vh] leading-[0.7] tracking-[-0.05em] font-headings">
-	  		Kieron <br></br> von Buchstab
+	  	<h1 className="absolute flex hidden xl:block p-standard absolute bottom-0 left-0 text-[20vw] 2xl:text-[23vh] leading-[0.7] tracking-[-0.05em]  font-headings space-y-8">
+	  		<div>Kieron</div>
+		       <div>von Buchstab</div>
 	  	</h1>
 	  </section>
     <nav

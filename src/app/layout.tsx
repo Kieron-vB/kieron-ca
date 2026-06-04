@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Scheherazade_New, Figtree, Caveat } from "next/font/google";
+import { Tiro_Devanagari_Sanskrit, Figtree, Caveat } from "next/font/google";
 import LoadingScreen from '../components/LoadingScreen';
 
-const scheherazadeNew = Scheherazade_New({
+const main_font = Tiro_Devanagari_Sanskrit({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-scheherazade-new",
+  weight: ["400"],
+  variable: "--font-main-font",
 });
 
 const figtree = Figtree({
@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${scheherazadeNew.variable} ${figtree.variable} ${caveat.variable}`}>
+    <html lang="en" className={`${main_font.variable} ${figtree.variable} ${caveat.variable}`}>
   <body className="bg-background">
       <LoadingScreen>
         <main>{children}</main>
