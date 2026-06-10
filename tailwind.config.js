@@ -12,9 +12,11 @@ module.exports = {
         accent: '#FFCA38',
         text: '#000000',
         link: '#0066FF',
+	'merch-bg': '#FFCA38',
+	'merch-bg-hover': '#90e0ef'
       },
       fontFamily: {
-	      headings: ['var(--font-main-font)'],
+	headings: ['var(--font-main-font)'],
         body: ['var(--font-main-font)'],
         buttons: ['var(--font-figtree)'],
 	writing: ['var(--font-caveat)'],
